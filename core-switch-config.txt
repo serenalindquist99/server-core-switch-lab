@@ -1,0 +1,23 @@
+hostname CoreSwitch01
+!
+interface Vlan10
+ ip address 192.168.10.1 255.255.255.0
+!
+interface Vlan20
+ ip address 192.168.20.1 255.255.255.0
+!
+spanning-tree mode rapid-pvst
+!
+ip access-list extended BLOCK_TELNET
+ deny tcp any any eq 23
+ permit ip any any
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 10
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 20
+!
+line vty 0 4
+ transport input ssh
+!
